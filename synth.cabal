@@ -13,7 +13,8 @@ extra-source-files:  ChangeLog.md
 cabal-version:       >=1.10
 
 library
-  exposed-modules:     Synth.Index
+  exposed-modules:     Control.Effect.Time
+                     , Synth.Index
                      , Synth.Matrix
                      , Synth.Shape
                      , Synth.Tree
