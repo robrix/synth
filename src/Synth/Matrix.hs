@@ -93,3 +93,8 @@ fromColumn :: V s a -> M 'S1 s a
 fromColumn V0         = M0
 fromColumn (V1 x)     = M1 x
 fromColumn (VB x1 x2) = MC (fromColumn x1) (fromColumn x2)
+
+fromDiagonal :: V s a -> M s s a
+fromDiagonal V0         = M0
+fromDiagonal (V1 x)     = M1 x
+fromDiagonal (VB v1 v2) = MQ (fromDiagonal v1) M0 M0 (fromDiagonal v2)
