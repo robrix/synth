@@ -15,3 +15,12 @@ data M sx sy a where
      -> M ('SB sx1 sx2) ('SB sy1 sy2) a
 
 deriving instance Eq   a => Eq   (M sx sy a)
+
+instance Ord a => Ord (M sx sy a) where
+  compare M0               M0               = EQ
+  compare M0               _                = LT
+  compare _                M0               = GT
+  compare (M1 a1)          (M1 a2)          = compare a1 a2
+  compare (MR a1 b1)       (MR a2 b2)       = compare a1 a2 <> compare b1 b2
+  compare (MC a1 b1)       (MC a2 b2)       = compare a1 a2 <> compare b1 b2
+  compare (MQ a1 b1 c1 d1) (MQ a2 b2 c2 d2) = compare a1 a2 <> compare b1 b2 <> compare c1 c2 <> compare d1 d2
