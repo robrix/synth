@@ -100,6 +100,13 @@ fromDiagonal V0         = M0
 fromDiagonal (V1 x)     = M1 x
 fromDiagonal (VB v1 v2) = MQ (fromDiagonal v1) M0 M0 (fromDiagonal v2)
 
+transpose :: M sx sy a -> M sy sx a
+transpose M0           = M0
+transpose (M1 x)       = M1 x
+transpose (MR x1 x2)   = MC (transpose x1) (transpose x2)
+transpose (MC y1 y2)   = MR (transpose y1) (transpose y2)
+transpose (MQ a b c d) = MQ (transpose a) (transpose c) (transpose b) (transpose d)
+
 row :: M sx sy a -> I sy -> V sx a
 row M0                       _      = V0
 row (M1 x)                   I1     = V1 x
