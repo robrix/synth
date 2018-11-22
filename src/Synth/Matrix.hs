@@ -77,3 +77,8 @@ instance (Applicative (M sx1 sy1), Applicative (M sx2 sy1), Applicative (M sx1 s
 
 data SomeM a where
   SomeM :: M sx sy a -> SomeM a
+
+deriving instance Show a => Show (SomeM a)
+deriving instance Foldable SomeM
+deriving instance Functor SomeM
+deriving instance Traversable SomeM
