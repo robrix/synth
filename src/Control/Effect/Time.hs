@@ -10,3 +10,6 @@ data Time (m :: * -> *) k
 
 instance HFunctor Time where
   hmap _ = coerce
+
+instance Effect Time where
+  handle state handler = coerce . fmap (handler . (<$ state))
