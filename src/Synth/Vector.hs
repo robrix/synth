@@ -48,3 +48,6 @@ data SomeV a where
   SomeV :: V s a -> SomeV a
 
 deriving instance Show a => Show (SomeV a)
+deriving instance Foldable SomeV
+deriving instance Functor SomeV
+deriving instance Traversable SomeV
