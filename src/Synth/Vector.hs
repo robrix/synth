@@ -20,3 +20,7 @@ instance Semigroup a => Semigroup (V s a) where
   a1       <> V0       = a1
   V1 a1    <> V1 a2    = V1 (a1 <> a2)
   VB a1 b1 <> VB a2 b2 = VB (a1 <> a2) (b1 <> b2)
+
+instance Semigroup a => Monoid (V s a) where
+  mempty = V0
+  mappend = (<>)
