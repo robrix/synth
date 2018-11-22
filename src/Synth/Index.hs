@@ -56,6 +56,6 @@ instance (Enum (I s1), Enum (I s2), Shaped s1, Shaped s2) => Ix (I ('SB s1 s2)) 
 
   {-# INLINE index #-}
   index b@(l, _) i | inRange b i = fromEnum i - fromEnum l
-                   | otherwise   = error $ "Ix{I ('" ++ show (shape i) ++ ")}.index: Index (" ++ show i ++ ") out of range " ++ show b
+                   | otherwise   = errorWithoutStackTrace $ "Ix{I ('" ++ show (shape i) ++ ")}.index: Index (" ++ show i ++ ") out of range " ++ show b
 
   inRange (l, h) i = l <= i && i <= h
