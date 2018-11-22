@@ -3,7 +3,7 @@ module Synth.Matrix where
 
 import Synth.Index
 import Synth.Shape
-import Synth.Vector
+import Synth.Vector hiding ((!))
 
 data M sx sy a where
   M0 :: M sx sy a
@@ -116,6 +116,17 @@ col (MC y1 y2)               I1     = VB (col y1 I1) (col y2 I1)
 col (MQ x1y1 _    x1y2 _)    (IL i) = VB (col x1y1 i) (col x1y2 i)
 col (MQ _    x2y1 _    x2y2) (IR i) = VB (col x2y1 i) (col x2y2 i)
 
+(!) :: M sx sy a -> (I sx, I sy) -> Maybe a
+M0         ! _            = Nothing
+M1 x       ! (I1, I1)     = Just x
+MR m _     ! (IL i, j)    = m ! (i, j)
+MR _ m     ! (IR i, j)    = m ! (i, j)
+MC m _     ! (i, IL j)    = m ! (i, j)
+MC _ m     ! (i, IR j)    = m ! (i, j)
+MQ m _ _ _ ! (IL i, IL j) = m ! (i, j)
+MQ _ m _ _ ! (IR i, IL j) = m ! (i, j)
+MQ _ _ m _ ! (IL i, IR j) = m ! (i, j)
+MQ _ _ _ m ! (IR i, IR j) = m ! (i, j)
 
 data SomeM a where
   SomeM :: M sx sy a -> SomeM a
