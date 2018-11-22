@@ -1,4 +1,4 @@
-{-# LANGUAGE DataKinds, FlexibleInstances, GADTs, StandaloneDeriving #-}
+{-# LANGUAGE DataKinds, FlexibleContexts, FlexibleInstances, GADTs, StandaloneDeriving #-}
 module Synth.Index where
 
 import Synth.Shape
@@ -22,3 +22,7 @@ deriving instance Show (I a)
 instance Bounded (I 'S1) where
   minBound = I1
   maxBound = I1
+
+instance (Bounded (I s1), Bounded (I s2)) => Bounded (I ('SB s1 s2)) where
+  minBound = IL minBound
+  maxBound = IR maxBound
