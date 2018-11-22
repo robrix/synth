@@ -109,5 +109,14 @@ row (MC _  y2)               (IR i) = row y2 i
 row (MQ x1y1 x2y1 _    _)    (IL i) = VB (row x1y1 i) (row x2y1 i)
 row (MQ _    _    x1y2 x2y2) (IR i) = VB (row x1y2 i) (row x2y2 i)
 
+col :: M sx sy a -> I sx -> V sy a
+col M0                       _      = V0
+col (M1 x)                   I1     = V1 x
+col (MR x1 _)                (IL i) = col x1 i
+col (MR _  x2)               (IR i) = col x2 i
+col (MC y1 y2)               I1     = VB (col y1 I1) (col y2 I1)
+col (MQ x1y1 _    x1y2 _)    (IL i) = VB (col x1y1 i) (col x1y2 i)
+col (MQ _    x2y1 _    x2y2) (IR i) = VB (col x2y1 i) (col x2y2 i)
+
 withMatrix :: (forall sx sy . M sx sy a -> b) -> SomeM a -> b
 withMatrix f (SomeM m) = f m
