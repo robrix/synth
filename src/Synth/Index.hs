@@ -1,4 +1,4 @@
-{-# LANGUAGE DataKinds, GADTs, StandaloneDeriving #-}
+{-# LANGUAGE DataKinds, FlexibleInstances, GADTs, StandaloneDeriving #-}
 module Synth.Index where
 
 import Synth.Shape
@@ -18,3 +18,7 @@ instance Ord (I s) where
   compare (IR i1) (IR i2) = compare i1 i2
 
 deriving instance Show (I a)
+
+instance Bounded (I 'S1) where
+  minBound = I1
+  maxBound = I1
