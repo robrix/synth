@@ -46,3 +46,9 @@ instance Applicative (M 'S0 'S0) where
   pure _ = M0
 
   _ <*> _ = M0
+
+instance Applicative (M 'S1 'S1) where
+  pure = M1
+
+  M0   <*> _ = M0
+  M1 f <*> a = fmap f a
