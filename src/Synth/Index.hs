@@ -16,3 +16,5 @@ instance Ord (I s) where
   compare (IL _)  _       = LT
   compare _       (IL _)  = GT
   compare (IR i1) (IR i2) = compare i1 i2
+
+deriving instance Show (I a)
