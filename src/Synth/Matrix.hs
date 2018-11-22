@@ -66,3 +66,10 @@ instance (Applicative (M 'S1 sy1), Applicative (M 'S1 sy2)) => Applicative (M 'S
   M0       <*> _        = M0
   _        <*> M0       = M0
   MC f1 f2 <*> MC a1 a2 = MC (f1 <*> a1) (f2 <*> a2)
+
+instance (Applicative (M sx1 sy1), Applicative (M sx2 sy1), Applicative (M sx1 sy2), Applicative (M sx2 sy2)) => Applicative (M ('SB sx1 sx2) ('SB sy1 sy2)) where
+  pure a = MQ (pure a) (pure a) (pure a) (pure a)
+
+  M0             <*> _              = M0
+  _              <*> M0             = M0
+  MQ f1 f2 f3 f4 <*> MQ a1 a2 a3 a4 = MQ (f1 <*> a1) (f2 <*> a2) (f3 <*> a3) (f4 <*> a4)
