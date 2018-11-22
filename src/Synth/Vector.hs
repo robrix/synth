@@ -2,6 +2,7 @@
 module Synth.Vector where
 
 import Synth.Shape
+import Synth.Tree
 
 data V s a where
   V0 :: V s a
@@ -51,3 +52,9 @@ deriving instance Show a => Show (SomeV a)
 deriving instance Foldable SomeV
 deriving instance Functor SomeV
 deriving instance Traversable SomeV
+
+fromB :: B a -> SomeV a
+fromB B0         = SomeV V0
+fromB (B1 x)     = SomeV (V1 x)
+fromB (BB x1 x2) = case (fromB x1, fromB x2) of
+  (SomeV v1, SomeV v2) -> SomeV (VB v1 v2)
