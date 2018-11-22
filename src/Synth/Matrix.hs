@@ -1,4 +1,4 @@
-{-# LANGUAGE DataKinds, DeriveTraversable, FlexibleContexts, FlexibleInstances, GADTs, StandaloneDeriving #-}
+{-# LANGUAGE DataKinds, DeriveTraversable, FlexibleContexts, FlexibleInstances, GADTs, RankNTypes, StandaloneDeriving #-}
 module Synth.Matrix where
 
 import Synth.Shape
@@ -98,3 +98,6 @@ fromDiagonal :: V s a -> M s s a
 fromDiagonal V0         = M0
 fromDiagonal (V1 x)     = M1 x
 fromDiagonal (VB v1 v2) = MQ (fromDiagonal v1) M0 M0 (fromDiagonal v2)
+
+withMatrix :: (forall sx sy . M sx sy a -> b) -> SomeM a -> b
+withMatrix f (SomeM m) = f m
