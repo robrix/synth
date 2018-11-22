@@ -29,3 +29,9 @@ instance Applicative (V 'S0) where
   pure _ = V0
 
   _ <*> _ = V0
+
+instance Applicative (V 'S1) where
+  pure = V1
+
+  V0   <*> _ = V0
+  V1 f <*> a = fmap f a
