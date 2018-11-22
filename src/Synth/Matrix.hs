@@ -76,15 +76,6 @@ instance (Applicative (M sx1 sy1), Applicative (M sx2 sy1), Applicative (M sx1 s
   _              <*> M0             = M0
   MQ f1 f2 f3 f4 <*> MQ a1 a2 a3 a4 = MQ (f1 <*> a1) (f2 <*> a2) (f3 <*> a3) (f4 <*> a4)
 
-
-data SomeM a where
-  SomeM :: M sx sy a -> SomeM a
-
-deriving instance Show a => Show (SomeM a)
-deriving instance Foldable SomeM
-deriving instance Functor SomeM
-deriving instance Traversable SomeM
-
 fromRow :: V s a -> M s 'S1 a
 fromRow V0         = M0
 fromRow (V1 x)     = M1 x
@@ -124,6 +115,15 @@ col (MR _  x2)               (IR i) = col x2 i
 col (MC y1 y2)               I1     = VB (col y1 I1) (col y2 I1)
 col (MQ x1y1 _    x1y2 _)    (IL i) = VB (col x1y1 i) (col x1y2 i)
 col (MQ _    x2y1 _    x2y2) (IR i) = VB (col x2y1 i) (col x2y2 i)
+
+
+data SomeM a where
+  SomeM :: M sx sy a -> SomeM a
+
+deriving instance Show a => Show (SomeM a)
+deriving instance Foldable SomeM
+deriving instance Functor SomeM
+deriving instance Traversable SomeM
 
 withMatrix :: (forall sx sy . M sx sy a -> b) -> SomeM a -> b
 withMatrix f (SomeM m) = f m
