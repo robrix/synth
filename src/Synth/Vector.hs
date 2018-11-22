@@ -42,3 +42,7 @@ instance (Applicative (V s1), Applicative (V s2)) => Applicative (V ('SB s1 s2))
   V0       <*> _        = V0
   _        <*> V0       = V0
   VB f1 f2 <*> VB a1 a2 = VB (f1 <*> a1) (f2 <*> a2)
+
+
+data SomeV a where
+  SomeV :: V s a -> SomeV a
