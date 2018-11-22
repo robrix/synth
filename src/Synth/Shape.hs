@@ -12,3 +12,6 @@ smax (SB s1 s2) = smax s1 + smax s2
 
 class Shaped (s :: S) where
   shape :: proxy s -> S
+
+instance Shaped 'S0 where
+  shape _ = S0
