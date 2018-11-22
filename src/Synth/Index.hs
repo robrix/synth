@@ -26,3 +26,9 @@ instance Bounded (I 'S1) where
 instance (Bounded (I s1), Bounded (I s2)) => Bounded (I ('SB s1 s2)) where
   minBound = IL minBound
   maxBound = IR maxBound
+
+instance Enum (I 'S1) where
+  toEnum 1 = I1
+  toEnum i = error $ "toEnum: (" ++ show i ++ ") out of bounds (" ++ show I1 ++ ")"
+
+  fromEnum _ = 1
