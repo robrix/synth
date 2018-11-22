@@ -50,3 +50,12 @@ instance Ix (I 'S1) where
   index (I1, I1) I1 = 0
 
   inRange (I1, I1) I1 = True
+
+instance (Enum (I s1), Enum (I s2), Shaped s1, Shaped s2) => Ix (I ('SB s1 s2)) where
+  range (l, h) = [l..h]
+
+  {-# INLINE index #-}
+  index b@(l, _) i | inRange b i = fromEnum i - fromEnum l
+                   | otherwise   = error $ "Ix{I ('" ++ show (shape i) ++ ")}.index: Index (" ++ show i ++ ") out of range " ++ show b
+
+  inRange (l, h) i = l <= i && i <= h
