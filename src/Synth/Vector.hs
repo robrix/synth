@@ -45,11 +45,11 @@ instance (Applicative (V s1), Applicative (V s2)) => Applicative (V ('SB s1 s2))
   _        <*> V0       = V0
   VB f1 f2 <*> VB a1 a2 = VB (f1 <*> a1) (f2 <*> a2)
 
-(!) :: V s a -> I s -> Maybe a
-V0       ! _    = Nothing
-V1 x     ! I1   = Just x
-VB x1 _  ! IL i = x1 ! i
-VB _  x2 ! IR i = x2 ! i
+(!?) :: V s a -> I s -> Maybe a
+V0       !? _    = Nothing
+V1 x     !? I1   = Just x
+VB x1 _  !? IL i = x1 !? i
+VB _  x2 !? IR i = x2 !? i
 
 
 data SomeV a where
