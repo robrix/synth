@@ -24,3 +24,5 @@ instance Ord a => Ord (M sx sy a) where
   compare (MR a1 b1)       (MR a2 b2)       = compare a1 a2 <> compare b1 b2
   compare (MC a1 b1)       (MC a2 b2)       = compare a1 a2 <> compare b1 b2
   compare (MQ a1 b1 c1 d1) (MQ a2 b2 c2 d2) = compare a1 a2 <> compare b1 b2 <> compare c1 c2 <> compare d1 d2
+
+deriving instance Show a => Show (M sx sy a)
