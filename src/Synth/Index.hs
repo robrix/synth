@@ -30,7 +30,7 @@ instance (Bounded (I s1), Bounded (I s2)) => Bounded (I ('SB s1 s2)) where
 
 instance Enum (I 'S1) where
   toEnum 1 = I1
-  toEnum i = errorWithoutStackTrace $ "toEnum: (" ++ show i ++ ") out of bounds (" ++ show I1 ++ ")"
+  toEnum i = errorWithoutStackTrace $ "Enum{I 'S1}.toEnum: Index (" ++ show i ++ ") out of range (" ++ show I1 ++ ", " ++ show I1 ++ ")"
 
   fromEnum _ = 1
 
