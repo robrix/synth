@@ -1,4 +1,4 @@
-{-# LANGUAGE DeriveFunctor, FlexibleInstances, KindSignatures, MultiParamTypeClasses, TypeOperators, UndecidableInstances #-}
+{-# LANGUAGE DeriveFunctor, FlexibleContexts, FlexibleInstances, KindSignatures, MultiParamTypeClasses, TypeOperators, UndecidableInstances #-}
 module Control.Effect.Time where
 
 import Control.Effect.Carrier
@@ -17,6 +17,10 @@ instance HFunctor Time where
 
 instance Effect Time where
   handle state handler = coerce . fmap (handler . (<$ state))
+
+
+time :: (Carrier sig m, Member Time sig) => m Double
+time = send (Time ret)
 
 
 runTime :: (Carrier sig m, MonadIO m) => Eff (TimeC m) a -> m a
