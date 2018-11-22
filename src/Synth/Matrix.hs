@@ -88,3 +88,8 @@ fromRow :: V s a -> M s 'S1 a
 fromRow V0         = M0
 fromRow (V1 x)     = M1 x
 fromRow (VB x1 x2) = MR (fromRow x1) (fromRow x2)
+
+fromColumn :: V s a -> M 'S1 s a
+fromColumn V0         = M0
+fromColumn (V1 x)     = M1 x
+fromColumn (VB x1 x2) = MC (fromColumn x1) (fromColumn x2)
