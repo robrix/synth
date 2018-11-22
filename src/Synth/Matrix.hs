@@ -1,4 +1,4 @@
-{-# LANGUAGE DataKinds, DeriveTraversable, FlexibleInstances, GADTs, StandaloneDeriving #-}
+{-# LANGUAGE DataKinds, DeriveTraversable, FlexibleContexts, FlexibleInstances, GADTs, StandaloneDeriving #-}
 module Synth.Matrix where
 
 import Synth.Shape
@@ -52,3 +52,10 @@ instance Applicative (M 'S1 'S1) where
 
   M0   <*> _ = M0
   M1 f <*> a = fmap f a
+
+instance (Applicative (M sx1 'S1), Applicative (M sx2 'S1)) => Applicative (M ('SB sx1 sx2) 'S1) where
+  pure a = MR (pure a) (pure a)
+
+  M0       <*> _        = M0
+  _        <*> M0       = M0
+  MR f1 f2 <*> MR a1 a2 = MR (f1 <*> a1) (f2 <*> a2)
