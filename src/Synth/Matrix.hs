@@ -73,3 +73,7 @@ instance (Applicative (M sx1 sy1), Applicative (M sx2 sy1), Applicative (M sx1 s
   M0             <*> _              = M0
   _              <*> M0             = M0
   MQ f1 f2 f3 f4 <*> MQ a1 a2 a3 a4 = MQ (f1 <*> a1) (f2 <*> a2) (f3 <*> a3) (f4 <*> a4)
+
+
+data SomeM a where
+  SomeM :: M sx sy a -> SomeM a
