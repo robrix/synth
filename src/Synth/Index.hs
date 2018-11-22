@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds, FlexibleContexts, FlexibleInstances, GADTs, StandaloneDeriving #-}
 module Synth.Index where
 
+import Data.Ix
 import Synth.Shape
 
 data I s where
@@ -42,3 +43,10 @@ instance (Enum (I s1), Enum (I s2), Shaped s1) => Enum (I ('SB s1 s2)) where
   fromEnum   (IL i) =          fromEnum i
   fromEnum s@(IR i) = smax m + fromEnum i
     where m = shape (lproxy s)
+
+instance Ix (I 'S1) where
+  range (I1, I1) = [I1]
+
+  index (I1, I1) I1 = 0
+
+  inRange (I1, I1) I1 = True
