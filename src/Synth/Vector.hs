@@ -1,4 +1,4 @@
-{-# LANGUAGE DataKinds, DeriveTraversable, FlexibleContexts, FlexibleInstances, GADTs, StandaloneDeriving #-}
+{-# LANGUAGE DataKinds, DeriveTraversable, FlexibleContexts, FlexibleInstances, GADTs, RankNTypes, StandaloneDeriving #-}
 module Synth.Vector where
 
 import Synth.Shape
@@ -58,3 +58,6 @@ fromB B0         = SomeV V0
 fromB (B1 x)     = SomeV (V1 x)
 fromB (BB x1 x2) = case (fromB x1, fromB x2) of
   (SomeV v1, SomeV v2) -> SomeV (VB v1 v2)
+
+withVector :: (forall s . V s a -> b) -> SomeV a -> b
+withVector f (SomeV v) = f v
