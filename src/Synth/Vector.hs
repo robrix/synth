@@ -46,3 +46,5 @@ instance (Applicative (V s1), Applicative (V s2)) => Applicative (V ('SB s1 s2))
 
 data SomeV a where
   SomeV :: V s a -> SomeV a
+
+deriving instance Show a => Show (SomeV a)
