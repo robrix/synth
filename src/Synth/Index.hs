@@ -42,3 +42,14 @@ instance (Enum (I s1), Enum (I s2), Shaped s1) => Enum (I ('SB s1 s2)) where
   fromEnum   (IL i) =          fromEnum i
   fromEnum s@(IR i) = smax m + fromEnum i
     where m = shape (lproxy s)
+
+instance Num (I 'S1) where
+  fromInteger _ = I1
+
+  _ + _ = I1
+  _ - _ = I1
+  _ * _ = I1
+
+  abs    _ = I1
+  signum _ = I1
+  negate _ = I1
