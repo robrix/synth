@@ -1,4 +1,4 @@
-{-# LANGUAGE DataKinds, DeriveTraversable, GADTs, StandaloneDeriving #-}
+{-# LANGUAGE DataKinds, DeriveTraversable, FlexibleInstances, GADTs, StandaloneDeriving #-}
 module Synth.Vector where
 
 import Synth.Shape
@@ -24,3 +24,8 @@ instance Semigroup a => Semigroup (V s a) where
 instance Semigroup a => Monoid (V s a) where
   mempty = V0
   mappend = (<>)
+
+instance Applicative (V 'S0) where
+  pure _ = V0
+
+  _ <*> _ = V0
