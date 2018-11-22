@@ -1,4 +1,4 @@
-{-# LANGUAGE DataKinds, GADTs #-}
+{-# LANGUAGE DataKinds, GADTs, StandaloneDeriving #-}
 module Synth.Matrix where
 
 import Synth.Shape
@@ -13,3 +13,5 @@ data M sx sy a where
   MQ :: M sx1 sy1 a -> M sx2 sy1 a
      -> M sx1 sy2 a -> M sx2 sy2 a
      -> M ('SB sx1 sx2) ('SB sy1 sy2) a
+
+deriving instance Eq   a => Eq   (M sx sy a)
