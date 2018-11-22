@@ -2,6 +2,7 @@
 module Synth.Matrix where
 
 import Synth.Shape
+import Synth.Vector
 
 data M sx sy a where
   M0 :: M sx sy a
@@ -82,3 +83,8 @@ deriving instance Show a => Show (SomeM a)
 deriving instance Foldable SomeM
 deriving instance Functor SomeM
 deriving instance Traversable SomeM
+
+fromRow :: V s a -> M s 'S1 a
+fromRow V0         = M0
+fromRow (V1 x)     = M1 x
+fromRow (VB x1 x2) = MR (fromRow x1) (fromRow x2)
