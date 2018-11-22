@@ -1,4 +1,4 @@
-{-# LANGUAGE DataKinds, DeriveTraversable, GADTs, StandaloneDeriving #-}
+{-# LANGUAGE DataKinds, DeriveTraversable, FlexibleInstances, GADTs, StandaloneDeriving #-}
 module Synth.Matrix where
 
 import Synth.Shape
@@ -41,3 +41,8 @@ instance Semigroup a => Semigroup (M x y a) where
 instance Semigroup a => Monoid (M x y a) where
   mempty = M0
   mappend = (<>)
+
+instance Applicative (M 'S0 'S0) where
+  pure _ = M0
+
+  _ <*> _ = M0
