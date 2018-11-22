@@ -1,4 +1,4 @@
-{-# LANGUAGE DataKinds, DeriveTraversable, FlexibleInstances, GADTs, StandaloneDeriving #-}
+{-# LANGUAGE DataKinds, DeriveTraversable, FlexibleContexts, FlexibleInstances, GADTs, StandaloneDeriving #-}
 module Synth.Vector where
 
 import Synth.Shape
@@ -35,3 +35,10 @@ instance Applicative (V 'S1) where
 
   V0   <*> _ = V0
   V1 f <*> a = fmap f a
+
+instance (Applicative (V s1), Applicative (V s2)) => Applicative (V ('SB s1 s2)) where
+  pure a = VB (pure a) (pure a)
+
+  V0       <*> _        = V0
+  _        <*> V0       = V0
+  VB f1 f2 <*> VB a1 a2 = VB (f1 <*> a1) (f2 <*> a2)
