@@ -29,3 +29,11 @@ deriving instance Show a => Show (M sx sy a)
 deriving instance Foldable (M sx sy)
 deriving instance Functor (M sx sy)
 deriving instance Traversable (M sx sy)
+
+instance Semigroup a => Semigroup (M x y a) where
+  M0             <> a2             = a2
+  a1             <> M0             = a1
+  M1 a1          <> M1 a2          = M1 (a1 <> a2)
+  MR a1 b1       <> MR a2 b2       = MR (a1 <> a2) (b1 <> b2)
+  MC a1 b1       <> MC a2 b2       = MC (a1 <> a2) (b1 <> b2)
+  MQ a1 b1 c1 d1 <> MQ a2 b2 c2 d2 = MQ (a1 <> a2) (b1 <> b2) (c1 <> c2) (d1 <> d2)
