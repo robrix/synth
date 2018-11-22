@@ -13,7 +13,8 @@ extra-source-files:  ChangeLog.md
 cabal-version:       >=1.10
 
 library
-  exposed-modules:     Synth.Shape
+  exposed-modules:     Synth.Index
+                     , Synth.Shape
                      , Synth.Tree
   -- other-modules:
   -- other-extensions:
