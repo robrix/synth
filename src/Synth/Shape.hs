@@ -15,3 +15,6 @@ class Shaped (s :: S) where
 
 instance Shaped 'S0 where
   shape _ = S0
+
+instance Shaped 'S1 where
+  shape _ = S1
