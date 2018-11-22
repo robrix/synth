@@ -1,4 +1,4 @@
-{-# LANGUAGE DataKinds, GADTs, StandaloneDeriving #-}
+{-# LANGUAGE DataKinds, DeriveFoldable, GADTs, StandaloneDeriving #-}
 module Synth.Vector where
 
 import Synth.Shape
@@ -11,3 +11,4 @@ data V s a where
 deriving instance Eq   a => Eq   (V s a)
 deriving instance Ord  a => Ord  (V s a)
 deriving instance Show a => Show (V s a)
+deriving instance Foldable (V s)
