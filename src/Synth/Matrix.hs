@@ -1,4 +1,4 @@
-{-# LANGUAGE DataKinds, DeriveFoldable, DeriveFunctor, GADTs, StandaloneDeriving #-}
+{-# LANGUAGE DataKinds, DeriveTraversable, GADTs, StandaloneDeriving #-}
 module Synth.Matrix where
 
 import Synth.Shape
@@ -28,3 +28,4 @@ instance Ord a => Ord (M sx sy a) where
 deriving instance Show a => Show (M sx sy a)
 deriving instance Foldable (M sx sy)
 deriving instance Functor (M sx sy)
+deriving instance Traversable (M sx sy)
