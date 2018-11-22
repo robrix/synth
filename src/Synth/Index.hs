@@ -5,8 +5,8 @@ import Synth.Shape
 
 data I a where
   I1 :: I 'S1
-  IL :: I i1 -> I ('SB i1 i2)
-  IR :: I i2 -> I ('SB i1 i2)
+  IL :: I s1 -> I ('SB s1 s2)
+  IR :: I s2 -> I ('SB s1 s2)
 
 deriving instance Eq (I a)
 
