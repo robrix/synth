@@ -3,7 +3,7 @@ module Synth.Index where
 
 import Synth.Shape
 
-data I a where
+data I s where
   I1 :: I 'S1
   IL :: I s1 -> I ('SB s1 s2)
   IR :: I s2 -> I ('SB s1 s2)
