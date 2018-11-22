@@ -37,3 +37,7 @@ instance Semigroup a => Semigroup (M x y a) where
   MR a1 b1       <> MR a2 b2       = MR (a1 <> a2) (b1 <> b2)
   MC a1 b1       <> MC a2 b2       = MC (a1 <> a2) (b1 <> b2)
   MQ a1 b1 c1 d1 <> MQ a2 b2 c2 d2 = MQ (a1 <> a2) (b1 <> b2) (c1 <> c2) (d1 <> d2)
+
+instance Semigroup a => Monoid (M x y a) where
+  mempty = M0
+  mappend = (<>)
