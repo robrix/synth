@@ -1,4 +1,4 @@
-{-# LANGUAGE DataKinds, FlexibleContexts, FlexibleInstances, GADTs, StandaloneDeriving #-}
+{-# LANGUAGE DataKinds, FlexibleContexts, FlexibleInstances, GADTs, MultiParamTypeClasses, StandaloneDeriving #-}
 module Synth.Index where
 
 import Synth.Shape
@@ -32,3 +32,6 @@ instance Enum (I 'S1) where
   toEnum i = error $ "toEnum: (" ++ show i ++ ") out of bounds (" ++ show I1 ++ ")"
 
   fromEnum _ = 1
+
+instance Shaped S (I 'S1) where
+  shape _ = S1
