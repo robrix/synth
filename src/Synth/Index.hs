@@ -32,3 +32,13 @@ instance Enum (I 'S1) where
   toEnum i = error $ "toEnum: (" ++ show i ++ ") out of bounds (" ++ show I1 ++ ")"
 
   fromEnum _ = 1
+
+instance (Enum (I s1), Enum (I s2), Shaped s1) => Enum (I ('SB s1 s2)) where
+  toEnum i = s
+    where m = shape (lproxy s)
+          s | i > 0, i <= smax m = IL (toEnum i)
+            | otherwise          = IR (toEnum (i - smax m))
+
+  fromEnum   (IL i) =          fromEnum i
+  fromEnum s@(IR i) = smax m + fromEnum i
+    where m = shape (lproxy s)
