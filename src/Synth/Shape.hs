@@ -18,3 +18,10 @@ instance Shaped 'S0 where
 
 instance Shaped 'S1 where
   shape _ = S1
+
+instance (Shaped s1, Shaped s2) => Shaped ('SB s1 s2) where
+  shape p = SB (shape (l p)) (shape (r p))
+    where l :: proxy ('SB s1 s2) -> proxy s1
+          l _ = undefined
+          r :: proxy ('SB s1 s2) -> proxy s2
+          r _ = undefined
