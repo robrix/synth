@@ -1,4 +1,5 @@
+{-# LANGUAGE DeriveFunctor #-}
 module Synth.Tree where
 
 data B a = B0 | B1 a | BB (B a) (B a)
-  deriving (Eq, Ord, Show)
+  deriving (Eq, Functor, Ord, Show)
