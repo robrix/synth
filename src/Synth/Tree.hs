@@ -1,5 +1,5 @@
-{-# LANGUAGE DeriveFunctor #-}
+{-# LANGUAGE DeriveFoldable, DeriveFunctor #-}
 module Synth.Tree where
 
 data B a = B0 | B1 a | BB (B a) (B a)
-  deriving (Eq, Functor, Ord, Show)
+  deriving (Eq, Foldable, Functor, Ord, Show)
